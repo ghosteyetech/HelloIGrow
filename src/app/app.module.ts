@@ -15,6 +15,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+//Firebase
+import { environment } from '../environments/environment';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
+import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -23,12 +33,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     AppRoutingModule,
 
+    AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
-  providers: [
+  providers: [ AuthGuardService, AuthService,
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
 })
