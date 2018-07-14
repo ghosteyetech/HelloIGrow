@@ -8,12 +8,14 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 
 import { Observable, of } from 'rxjs';
 import { switchMap, startWith, tap, filter } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
 interface User {
   uid: string;
-  email?: string | null;
+  email: string;
   photoURL?: string;
   displayName?: string;
+  favoriteColor?: string;
 }
 
 @Injectable({
@@ -21,7 +23,7 @@ interface User {
 })
 export class AuthService {
 
-  user: Observable<User | null>;
+  user: Observable<User>;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -120,7 +122,7 @@ export class AuthService {
 
   logout() {
     this.afAuth.auth.signOut().then(() => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/auth']);
     });
   }
 
@@ -142,16 +144,43 @@ export class AuthService {
       displayName: user.displayName || 'nameless user',
       photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ'
     };
-    return userRef.set(data);
+    //return userRef.set(data);
+    userRef.set(data);
+    this.router.navigate(['/dashboard'])
   }
 
-  isLoggedIn() {
-    console.log("Is logged in user: ",(this.user == null)? "No": "Yes");
-    if (this.user == null ) {
-      return false;
-    } else {
-      return true;
-    }
+  // async isLoggedIn() {
+  //   const user = await this.checkIsUserLoggedIn()
+  //     if (user) {
+  //       console.log("User logged in");
+  //       console.log(user);
+  //       return true;
+  //     } else {
+  //       console.log("User not logged in")
+  //       return false;
+  //     }
+  // }
+
+  // checkIsUserLoggedIn() {
+  //   return this.afAuth.authState.pipe(first()).toPromise();
+  // }
+
+  checkIsUserLoggedIn() {
+    return this.afAuth.authState.pipe(first())
   }
+ 
+  isLoggedIn() {
+    this.checkIsUserLoggedIn().pipe(
+     tap(user => {
+       if (user) {
+         // do something
+       } else {
+         // do something else
+       }
+     })
+   )
+   .subscribe()
+ }
+ 
 
 }

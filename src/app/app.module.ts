@@ -23,10 +23,14 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { AuthService } from './services/auth.service';
-import { AuthGuardService } from './services/auth-guard.service';
+import {  AuthGuard } from './services/auth.guard';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { RequestPasswordComponent } from './auth/request-password/request-password.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SignupComponent, SigninComponent, RequestPasswordComponent, ResetPasswordComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -43,7 +47,7 @@ import { AuthGuardService } from './services/auth-guard.service';
     CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
-  providers: [ AuthGuardService, AuthService,
+  providers: [ AuthGuard, AuthService,
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
 })
