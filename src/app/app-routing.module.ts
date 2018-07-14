@@ -1,9 +1,15 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { SignupComponent } from './auth/signup/signup.component';
+//import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { RequestPasswordComponent } from './auth/request-password/request-password.component';
-import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+
+
+import { TestComponent } from './auth/test/test.component';
+import { RegisterComponent } from './home/register/register.component';
+import { LoginComponent } from './home/login/login.component';
+import { ResetPasswordComponent } from './home/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './home/change-password/change-password.component';
 
 import {
   NbAuthComponent,
@@ -18,10 +24,26 @@ import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { 
+    path: 'register', 
+    component : RegisterComponent,
+  },
+  {
+    path: 'login',
+    component : LoginComponent,
+  },
+  {
+    path : 'password_reset',
+    component : ResetPasswordComponent,
+  },
+  {
+    path : 'change_password',
+    component : ChangePasswordComponent
+  },
+  { 
     path: 'pages', 
     loadChildren: 'app/pages/pages.module#PagesModule',
     canActivate : [ AuthGuard ] 
-  },
+  }/*,
   {
     path: 'auth',
     component: NbAuthComponent,
@@ -51,7 +73,7 @@ const routes: Routes = [
         component: ResetPasswordComponent,// NbResetPasswordComponent,
       },
     ],
-  },
+  }*/,
   { path: '', redirectTo: 'pages', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
 ];

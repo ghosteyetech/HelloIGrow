@@ -27,10 +27,18 @@ import {  AuthGuard } from './services/auth.guard';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { RequestPasswordComponent } from './auth/request-password/request-password.component';
-import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { ResetPasswordComponent } from './home/reset-password/reset-password.component';
+import { TestComponent } from './auth/test/test.component';
+import { RegisterComponent } from './home/register/register.component';
+import { SignupformComponent } from './home/register/signupform/signupform.component';
+import { LoginComponent } from './home/login/login.component';
+import { LoginformComponent } from './home/login/loginform/loginform.component';
+import { ResetPasswordFormComponent } from './home/reset-password/reset-password-form/reset-password-form.component';
+import { ChangePasswordComponent } from './home/change-password/change-password.component';
+import { ChangePasswordFormComponent } from './home/change-password/change-password-form/change-password-form.component';
 
 @NgModule({
-  declarations: [AppComponent, SignupComponent, SigninComponent, RequestPasswordComponent, ResetPasswordComponent],
+  declarations: [AppComponent, SignupComponent, SigninComponent, RequestPasswordComponent, ResetPasswordComponent, TestComponent, RegisterComponent, SignupformComponent, LoginComponent, LoginformComponent, ResetPasswordFormComponent, ChangePasswordComponent, ChangePasswordFormComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
